@@ -123,7 +123,11 @@ public class MyLinkedList<T> {
 	}
 	
 	
-	
+	/**
+	 * return the item at an index
+	 * @param index - desired index
+	 * @return - object at a given index
+	 */
 	public T get(int index) {
 		
 		if (index < 0 || index >= this.size) throw new IndexOutOfBoundsException();
@@ -148,12 +152,73 @@ public class MyLinkedList<T> {
 	}
 	
 	
+	/**
+	 * delete the data at the given index
+	 * @param index - a given index
+	 * @return - the deleted data
+	 */
+	public T delete(int index) {
+		
+		if (index < 0 || index >= this.size) throw new IndexOutOfBoundsException();
+		
+		//	handle a single element linked list
+		if (this.size == 1) {
+			
+			MyNode nodeToDelete = this.head;
+			this.head = null;
+			this.tail = null;
+			this.size--;
+			return nodeToDelete.data;
+	
+		}
+		//	handle delete head
+		else if (index == 0) {
+			
+			MyNode nodeToDelete = this.head;
+			this.head = this.head.next;
+			this.size--;
+			return nodeToDelete.data;
+			
+		}
+		//	handle delete tail
+		else if (index == this.size -1) {
+			
+			MyNode nodeToDelete = this.tail;
+			this.tail = this.tail.prev;
+			this.tail.next = null;
+			this.size--;
+			return nodeToDelete.data;
+			
+		}
+		//	handle delete arbitrary index that is neither head nor tail
+		else {
+			
+			MyNode nodeToDelete = this.head;
+			
+			for (int i = 0; i < index; i++) nodeToDelete = nodeToDelete.next;
+			
+			//	move the pointers
+			nodeToDelete.prev.next = nodeToDelete.next;
+			nodeToDelete.prev = null;
+			this.size--;
+			
+			return nodeToDelete.data;
+			
+		}
+		
+	}
+	
+	
 	
 	
 	
 	//=====================================================================
 	//	=>	NODE
 	//=====================================================================
+	/**
+	 * node that holds data and pointers to adjacent nodes
+	 *
+	 */
 	class MyNode {
 		
 		//	properties
@@ -167,6 +232,26 @@ public class MyLinkedList<T> {
 			this.next = next;
 		}
 		
+		
+	}
+	
+	
+	//*************************************************************************************************************
+	//								QUESTIONS
+	//*************************************************************************************************************
+	
+	
+	//=====================================================================
+	//	=>	QUESTION 2.1
+	//=====================================================================
+	/**
+	 * Write code to remove duplicates from an unsorted LinkedList
+	 * Assumes - order does not matter, i.e. removing duplicates may change the order of elements
+	 * runtime => O (list.size())
+	 * @param list - an unsorted LinkedList
+	 * @return linked list with duplicates removed
+	 */
+	public void removeDuplicates() {
 		
 	}
 
