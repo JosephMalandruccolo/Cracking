@@ -23,6 +23,8 @@ public class MyLinkedList<T> {
 	//=====================================================================
 	public MyLinkedList () {
 		this.size = 0;
+		this.head = null;
+		this.tail = null;
 	}
 	
 	
